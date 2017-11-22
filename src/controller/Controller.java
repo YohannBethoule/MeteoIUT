@@ -6,46 +6,60 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.scene.layout.VBox;
 import metier.*;
+
+import static javafx.geometry.Pos.CENTER;
 
 
 public class Controller implements Initializable{
-    ObservableList<ICapteur> capteurs= FXCollections.observableArrayList();
-    private ListProperty<ICapteur> lCapteurs=new SimpleListProperty<>(capteurs);
+    static final String baseName="Sensor N°";
+
+    ObservableList<ISensor> sensors= FXCollections.observableArrayList();
+    private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
     @FXML
-    private ListView<ICapteur> listCapteurs=new ListView<>();
+    private ListView<ISensor> listSensors=new ListView<>();
 
     @FXML
     Label lbDigital;
 
+    @FXML
+    Button updateButton;
+
+
+
+    @FXML
+    Tab tabDigits;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        listCapteurs.itemsProperty().bind(lCapteurs);
+        listSensors.itemsProperty().bind(lSensors);
 
-        listCapteurs.setCellFactory(unused -> new ListCell<ICapteur>(){
+        listSensors.setCellFactory(unused -> new ListCell<ISensor>(){
             @Override
-            protected void updateItem(ICapteur item, boolean empty) {
+            protected void updateItem(ISensor item, boolean empty) {
                 super.updateItem(item, empty);
                 if(!isEmpty()){
-                    textProperty().bind(item.nomProperty());
+                    textProperty().bind(item.nameProperty());
+                }else{
+                    textProperty().unbind();
+                    textProperty().setValue(null);
                 }
             }
         });
 
-        listCapteurs.getSelectionModel().selectedItemProperty()
-                .addListener(new ChangeListener<ICapteur>() {
-                    public void changed(ObservableValue<? extends ICapteur> observable,
-                                        ICapteur oldValue, ICapteur newValue) {
+        listSensors.getSelectionModel().selectedItemProperty()
+                .addListener(new ChangeListener<ISensor>() {
+                    public void changed(ObservableValue<? extends ISensor> observable,
+                                        ISensor oldValue, ISensor newValue) {
                         if(oldValue!=null)
                             unbindDetail(oldValue);
                         if(newValue!=null)
@@ -53,22 +67,29 @@ public class Controller implements Initializable{
                     }
                 });
 
-
+        final VBox displayDigits=new VBox();
+        displayDigits.getChildren().add(lbDigital);
+        tabDigits.setContent(displayDigits);
     }
 
 
     @FXML
-    public void newCapteur(){
-        String nom="Capteur N°"+((List)capteurs).size();
-        ICapteur c=new CapteurSimple(nom);
-        capteurs.add(c);
+    public void newSensor(){
+        String nom=baseName+((List)sensors).size();
+        ISensor c=new SimpleSensor(nom);
+        sensors.add(c);
     }
 
-    public void unbindDetail(ICapteur oldValue){
+    public void unbindDetail(ISensor oldValue){
         lbDigital.textProperty().unbind();
     }
 
-    public void bindDetail(ICapteur newValue){
+    public void bindDetail(ISensor newValue){
         lbDigital.setText(newValue.getTemperature().toString());
+    }
+
+    @FXML
+    public void updateSensor(){
+        listSensors.getSelectionModel().getSelectedItem().update();
     }
 }
