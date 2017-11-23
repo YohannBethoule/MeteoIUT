@@ -73,10 +73,10 @@ public class Controller implements Initializable{
 
     @FXML
     public void newSensor(){
-        String nom=baseName+((List)sensors).size();
-        ISensor c=new SimpleSensor(nom);
+        String name=baseName+((List)sensors).size();
+        ISensor c=new SimpleSensor(name, 10);
         sensors.add(c);
-        initializeThread = new Thread (new RunnableSensor(c));
+        initializeThread=new Thread(new RunnableSensor(c));
         initializeThread.start();
     }
 
@@ -85,7 +85,7 @@ public class Controller implements Initializable{
     }
 
     public void bindDetail(ISensor newValue){
-        lbDigital.setText(newValue.getTemperature().toString());
+        lbDigital.textProperty().bind(newValue.temperatureProperty().asString());
     }
 
     @FXML

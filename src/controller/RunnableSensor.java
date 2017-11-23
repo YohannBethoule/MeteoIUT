@@ -14,16 +14,24 @@ import metier.ISensor;
  */
 public class RunnableSensor extends Controller implements Runnable {
     private Thread currentThread;
+    private ISensor sensor;
 
     public RunnableSensor (ISensor sensor){
+        this.sensor=sensor;
         currentThread = Thread.currentThread();  
         addThread(currentThread);
     }
     
     @Override
     public void run() {
-        
+        try {
+            currentThread.sleep(1000);
+            sensor.update();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     
 }
+

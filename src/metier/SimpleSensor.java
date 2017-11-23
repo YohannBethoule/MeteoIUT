@@ -1,21 +1,20 @@
 package metier;
 
 import javafx.beans.property.*;
-
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.Random;
+import javafx.concurrent.Task;
 
 public class SimpleSensor implements ISensor {
+    private  int refreshRate;
 
     private StringProperty name=new SimpleStringProperty();
     private DoubleProperty temperature=new SimpleDoubleProperty();
     private ITemperatureGenerator tempGenerator;
 
 
-    public SimpleSensor(String name){
+    public SimpleSensor(String name, int refreshRate){
         this.name.set(name);
-        this.tempGenerator=new RandomGeneration();
+        this.refreshRate=refreshRate;
+        this.tempGenerator=new IntervalGeneration();
         update();
     }
 
@@ -35,6 +34,7 @@ public class SimpleSensor implements ISensor {
     }
 
     public void update(){
-        setTemperature(tempGenerator.getRandomTemperature());
+        setTemperature(tempGenerator.generateTemperature());
     }
+
 }
