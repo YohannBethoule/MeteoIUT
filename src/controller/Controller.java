@@ -17,11 +17,11 @@ import java.util.ResourceBundle;
 import javafx.scene.layout.VBox;
 import metier.*;
 
-import static javafx.geometry.Pos.CENTER;
-
 
 public class Controller implements Initializable{
     static final String baseName="Sensor N°";
+
+    private Thread initializeThread;
 
     ObservableList<ISensor> sensors= FXCollections.observableArrayList();
     private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
@@ -33,8 +33,6 @@ public class Controller implements Initializable{
 
     @FXML
     Button updateButton;
-
-
 
     @FXML
     Tab tabDigits;
@@ -78,6 +76,8 @@ public class Controller implements Initializable{
         String nom=baseName+((List)sensors).size();
         ISensor c=new SimpleSensor(nom);
         sensors.add(c);
+        initializeThread = new Thread (new RunnableSensor(c));
+        initializeThread.start();
     }
 
     public void unbindDetail(ISensor oldValue){

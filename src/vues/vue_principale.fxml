@@ -35,7 +35,7 @@
         <Button onAction="#newSensor" text="Instancier un capteur" BorderPane.alignment="CENTER" />
     </bottom>
 
-    <Label fx:id="lbDigital" textFill="RED" BorderPane.alignment="CENTER">
+    <Label fx:id="lbDigital" textFill="RED">
         <font>
             <Font size="50" />
         </font>
