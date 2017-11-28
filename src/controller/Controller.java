@@ -70,6 +70,10 @@ public class Controller implements Initializable{
         tabDigits.setContent(displayDigits);
     }
 
+    @FXML
+    public void changeGeneration(){
+
+    }
 
     @FXML
     public void newSensor(){

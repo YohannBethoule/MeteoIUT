@@ -46,7 +46,7 @@ public interface ISensor {
      * Change the temperature of the sensor.
      * @param temperature the new value for the temperature
      */
-    public void setTemperature(Double temperature);
+    void setTemperature(Double temperature);
 
     /**
      * Update the temperature of the sensor, with the strategy implemented by the class.
