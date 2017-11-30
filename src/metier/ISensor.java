@@ -13,6 +13,23 @@ public interface ISensor {
     static final int maxTemp=40;
 
     /**
+     * Change the temperature of the sensor for displaying in a progessBar.
+     * @param ProgressTemperature the temperature to convert.
+     */
+    public void setProgressTemperature();
+
+    /**
+     *
+     * @return the progressBar temperature as a DoubleProerty
+     */
+    public DoubleProperty progessTemperatureProperty();
+
+    /**
+     *
+     * @return the progressBar temperature as a double
+     */
+    public double getProgressTemperature();
+    /**
      * @return the name of the sensor
      */
     public String getName();

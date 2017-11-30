@@ -3,11 +3,15 @@ package metier;
 import javafx.beans.property.*;
 import javafx.concurrent.Task;
 
+import static java.lang.Math.abs;
+
 public class SimpleSensor implements ISensor {
     private  int refreshRate;
+    static final double ZERO_PROGB = 0.5;
 
     private StringProperty name=new SimpleStringProperty();
     private DoubleProperty temperature=new SimpleDoubleProperty();
+    private DoubleProperty progressTemperature=new SimpleDoubleProperty();
     private ITemperatureGenerator tempGenerator;
 
 
@@ -19,6 +23,22 @@ public class SimpleSensor implements ISensor {
     }
 
 
+    public DoubleProperty progessTemperatureProperty(){
+        setProgressTemperature();
+        return progressTemperature;
+    }
+
+    public void setProgressTemperature() {
+        double temp;
+        if(getTemperature()<0){
+            temp=ZERO_PROGB-abs(getTemperature()/100);
+        }
+        temp= (getTemperature()/100.0)+ZERO_PROGB;
+        if(temp >=1){temp=1;}
+        this.progressTemperature.set(temp);
+    }
+
+    public double getProgressTemperature(){ return progressTemperature.get(); }
     public StringProperty nameProperty() {
         return name;
     }

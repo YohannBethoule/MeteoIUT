@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import java.net.URL;
@@ -37,6 +39,12 @@ public class Controller implements Initializable{
     @FXML
     Tab tabDigits;
 
+    @FXML
+    Tab tabThermometer;
+    @FXML
+    ProgressBar thermometer;
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         listSensors.itemsProperty().bind(lSensors);
@@ -65,10 +73,18 @@ public class Controller implements Initializable{
                     }
                 });
 
-        final VBox displayDigits=new VBox();
-        displayDigits.getChildren().add(lbDigital);
-        tabDigits.setContent(displayDigits);
+        viewTab(lbDigital,tabDigits);
+        viewTab(thermometer,tabThermometer);
     }
+
+    private void viewTab(Node children, Tab tab){
+
+        final VBox display=new VBox();
+        display.getChildren().add(children);
+        display.setAlignment(Pos.CENTER);
+        tab.setContent(display);
+    }
+
 
     @FXML
     public void changeGeneration(){
@@ -86,10 +102,12 @@ public class Controller implements Initializable{
 
     public void unbindDetail(ISensor oldValue){
         lbDigital.textProperty().unbind();
+        thermometer.progressProperty().unbind();
     }
 
     public void bindDetail(ISensor newValue){
         lbDigital.textProperty().bind(newValue.temperatureProperty().asString());
+        thermometer.progressProperty().bind(newValue.progessTemperatureProperty());
     }
 
     @FXML
