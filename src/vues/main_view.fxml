@@ -15,6 +15,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
 
@@ -30,7 +31,7 @@
         <TabPane BorderPane.alignment="CENTER_LEFT">
             <Tab fx:id="tabDigits" text="Numerique"></Tab>
             <Tab fx:id="tabThermometer" text="Thermometre"></Tab>
-            <Tab text="Icones"></Tab>
+            <Tab fx:id="tabIcone" text="Icones"></Tab>
         </TabPane>
     </center>
 
@@ -45,6 +46,7 @@
     </Label>
 
     <ProgressBar fx:id="thermometer"  prefWidth="200.0" rotate="-90"/>
+    <ImageView fx:id="imgThermo" />
 
     <right>
         <VBox alignment="CENTER">

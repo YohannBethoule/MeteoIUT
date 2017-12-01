@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import metier.*;
 
@@ -24,25 +25,18 @@ public class Controller implements Initializable{
     static final String baseName="Sensor N°";
 
     private Thread initializeThread;
-
     ObservableList<ISensor> sensors= FXCollections.observableArrayList();
     private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
-    @FXML
-    private ListView<ISensor> listSensors=new ListView<>();
 
-    @FXML
-    Label lbDigital;
+    @FXML    private ListView<ISensor> listSensors=new ListView<>();
+    @FXML    Label lbDigital;
+    @FXML    Button updateButton;
+    @FXML    Tab tabDigits;
+    @FXML    Tab tabIcone;
+    @FXML    Tab tabThermometer;
+    @FXML    ProgressBar thermometer;
+    @FXML    ImageView imgThermo = new ImageView();
 
-    @FXML
-    Button updateButton;
-
-    @FXML
-    Tab tabDigits;
-
-    @FXML
-    Tab tabThermometer;
-    @FXML
-    ProgressBar thermometer;
 
 
     @Override
@@ -75,6 +69,7 @@ public class Controller implements Initializable{
 
         viewTab(lbDigital,tabDigits);
         viewTab(thermometer,tabThermometer);
+        viewTab(imgThermo,tabIcone);
     }
 
     private void viewTab(Node children, Tab tab){
@@ -103,11 +98,13 @@ public class Controller implements Initializable{
     public void unbindDetail(ISensor oldValue){
         lbDigital.textProperty().unbind();
         thermometer.progressProperty().unbind();
+        imgThermo.imageProperty().unbind();
     }
 
     public void bindDetail(ISensor newValue){
         lbDigital.textProperty().bind(newValue.temperatureProperty().asString());
         thermometer.progressProperty().bind(newValue.progessTemperatureProperty());
+        imgThermo.imageProperty().bind(newValue.imageProperty());
     }
 
     @FXML

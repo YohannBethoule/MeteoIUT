@@ -2,7 +2,9 @@ package metier;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
 
 /**
  * @author Lulauriche et Yobethoule
@@ -13,14 +15,27 @@ public interface ISensor {
     static final int maxTemp=40;
 
     /**
+     *
+     * @return the Image of the Property.
+     */
+    public Image getImage();
+
+    /**
+     * Create a new image with different path and set it on the Property.
+     */
+    public void setImage();
+    /**
+    * @return the Image as a Imageproperty.
+     */
+    public ObjectProperty<Image> imageProperty();
+    /**
      * Change the temperature of the sensor for displaying in a progessBar.
-     * @param ProgressTemperature the temperature to convert.
      */
     public void setProgressTemperature();
 
     /**
      *
-     * @return the progressBar temperature as a DoubleProerty
+     * @return the progressBar temperature as a DoubleProperty.
      */
     public DoubleProperty progessTemperatureProperty();
 
