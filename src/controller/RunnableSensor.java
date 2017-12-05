@@ -12,7 +12,7 @@ import metier.ISensor;
  *
  * @author lulauriche
  */
-public class RunnableSensor extends Controller implements Runnable {
+public class RunnableSensor implements Runnable {
     private Thread currentThread;
     private ISensor sensor;
 

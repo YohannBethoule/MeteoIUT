@@ -38,15 +38,25 @@
     <bottom>
         <Button onAction="#newSensor" text="Instancier un capteur" BorderPane.alignment="CENTER" />
     </bottom>
+    <HBox fx:id="contentDigital" alignment="CENTER">
+        <Label fx:id="lbDigital" textFill="RED">
+            <font>
+                <Font size="50" />
+            </font>
+        </Label>
+        <Label text="°C" textFill="RED"/>
+    </HBox>
 
-    <Label fx:id="lbDigital" textFill="RED">
-        <font>
-            <Font size="50" />
-        </font>
-    </Label>
 
     <ProgressBar fx:id="thermometer"  prefWidth="200.0" rotate="-90"/>
-    <ImageView fx:id="imgThermo" />
+    <VBox fx:id="contentImg" alignment="CENTER">
+        <HBox alignment="CENTER">
+            <Label fx:id="lbIndicator"/>
+            <Label text="°C"/>
+        </HBox>
+        <ImageView fx:id="imgThermo" />
+    </VBox>
+
 
     <right>
         <VBox alignment="CENTER">

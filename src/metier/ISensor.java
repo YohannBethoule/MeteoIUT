@@ -15,15 +15,28 @@ public interface ISensor {
     static final int maxTemp=40;
 
     /**
+     * @return the path of the selected image
+     */
+    public String getPathImg();
+    /**
+     * set the path of the image
+     * @param path is the relative path in the ressources directory to pick the image
+     */
+    public void setPathImg(double temp);
+    /**
      *
      * @return the Image of the Property.
      */
     public Image getImage();
-
     /**
      * Create a new image with different path and set it on the Property.
      */
-    public void setImage();
+    public void setImage(Image img);
+    /**
+     *
+     * @return a StringProperty which gives the path of the image
+     */
+    public StringProperty pathImgProperty();
     /**
     * @return the Image as a Imageproperty.
      */
@@ -31,14 +44,12 @@ public interface ISensor {
     /**
      * Change the temperature of the sensor for displaying in a progessBar.
      */
-    public void setProgressTemperature();
-
+    public void setProgressTemperature(double temp);
     /**
      *
      * @return the progressBar temperature as a DoubleProperty.
      */
-    public DoubleProperty progessTemperatureProperty();
-
+    public DoubleProperty progressTemperatureProperty();
     /**
      *
      * @return the progressBar temperature as a double
@@ -48,37 +59,31 @@ public interface ISensor {
      * @return the name of the sensor
      */
     public String getName();
-
     /**
      *
      * @return the name of the sensor as a StringProperty
      */
     public StringProperty nameProperty() ;
-
     /**
      * Change the name of the sensor.
      * @param Name the new name of the sensor
      */
     public void setName(String Name);
-
-
     /**
      *
      * @return the current temperature of the sensor
      */
     public Double getTemperature();
-
     /**
      *
      * @return the current temperature of the sensor as a DoubleProperty
      */
     public DoubleProperty temperatureProperty();
-
     /**
      * Change the temperature of the sensor.
      * @param temperature the new value for the temperature
      */
-    void setTemperature(Double temperature);
+    void setTemperature(double temperature);
 
     /**
      * Update the temperature of the sensor, with the strategy implemented by the class.

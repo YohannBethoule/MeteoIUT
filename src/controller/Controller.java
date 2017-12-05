@@ -17,24 +17,28 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import metier.*;
+
 
 
 public class Controller implements Initializable{
     static final String baseName="Sensor N°";
 
-    private Thread initializeThread;
     ObservableList<ISensor> sensors= FXCollections.observableArrayList();
     private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
 
     @FXML    private ListView<ISensor> listSensors=new ListView<>();
+    @FXML    Tab tabDigits;
+    @FXML    HBox contentDigital;
     @FXML    Label lbDigital;
     @FXML    Button updateButton;
-    @FXML    Tab tabDigits;
-    @FXML    Tab tabIcone;
     @FXML    Tab tabThermometer;
     @FXML    ProgressBar thermometer;
+    @FXML    Tab tabIcone;
+    @FXML    VBox contentImg;
+    @FXML    Label lbIndicator;
     @FXML    ImageView imgThermo = new ImageView();
 
 
@@ -67,9 +71,9 @@ public class Controller implements Initializable{
                     }
                 });
 
-        viewTab(lbDigital,tabDigits);
+        viewTab(contentDigital,tabDigits);
         viewTab(thermometer,tabThermometer);
-        viewTab(imgThermo,tabIcone);
+        viewTab(contentImg,tabIcone);
     }
 
     private void viewTab(Node children, Tab tab){
@@ -91,20 +95,22 @@ public class Controller implements Initializable{
         String name=baseName+((List)sensors).size();
         ISensor c=new SimpleSensor(name, 10);
         sensors.add(c);
-        initializeThread=new Thread(new RunnableSensor(c));
-        initializeThread.start();
+        SensorThread initializedThread = new SensorThread(c);
+        initializedThread.start();
     }
 
     public void unbindDetail(ISensor oldValue){
         lbDigital.textProperty().unbind();
         thermometer.progressProperty().unbind();
         imgThermo.imageProperty().unbind();
+        lbIndicator.textProperty().unbind();
     }
 
     public void bindDetail(ISensor newValue){
         lbDigital.textProperty().bind(newValue.temperatureProperty().asString());
-        thermometer.progressProperty().bind(newValue.progessTemperatureProperty());
+        thermometer.progressProperty().bind(newValue.progressTemperatureProperty());
         imgThermo.imageProperty().bind(newValue.imageProperty());
+        lbIndicator.textProperty().bind(newValue.temperatureProperty().asString());
     }
 
     @FXML
