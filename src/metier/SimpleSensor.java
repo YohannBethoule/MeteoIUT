@@ -1,5 +1,6 @@
 package metier;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.concurrent.Task;
 import javafx.scene.image.Image;
@@ -38,7 +39,9 @@ public class SimpleSensor implements ISensor {
     public double getProgressTemperature(){ return progressTemperature.get(); }
 
     public void setTemperature(double temperature) {
-        this.temperature.set(temperature);
+        Platform.runLater(()->{
+            this.temperature.set(temperature);
+        });
     }
     public void setName(String name) {
         this.name.set(name);
