@@ -5,17 +5,11 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-<<<<<<< HEAD
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-=======
 import javafx.geometry.Pos;
 import javafx.scene.Node;
->>>>>>> 7dbe942c9458921e2c52bf5d72739f42aa218ed1
 import javafx.scene.control.*;
 
 import java.net.URL;
@@ -25,7 +19,6 @@ import java.util.ResourceBundle;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import metier.*;
 
 
@@ -98,15 +91,7 @@ public class Controller implements Initializable{
     }
 
     @FXML
-    public void newSensor() throws Exception{
-        Stage stage=new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/vues/sensor_creation.fxml"));
-        Scene scene=new Scene(root);
-        stage.setTitle("Création d'un capteur");
-        stage.setScene(scene);
-        stage.show();
-
-
+    public void newSensor(){
         String name=baseName+((List)sensors).size();
         ISensor c=new SimpleSensor(name, 10);
         sensors.add(c);
