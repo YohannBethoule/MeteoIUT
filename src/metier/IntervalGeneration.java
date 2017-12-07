@@ -1,15 +1,15 @@
 package metier;
 
-import static metier.ISensor.maxTemp;
-import static metier.ISensor.minTemp;
+import static metier.ISensor.MAX_TEMP;
+import static metier.ISensor.MIN_TEMP;
 
 public class IntervalGeneration implements  ITemperatureGenerator{
     private int min;
     private int max;
 
     public IntervalGeneration(){
-        this.min=minTemp;
-        this.max=maxTemp;
+        this.min= MIN_TEMP;
+        this.max= MAX_TEMP;
     }
 
     public IntervalGeneration(int min, int max){

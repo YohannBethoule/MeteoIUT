@@ -11,8 +11,14 @@ import javafx.scene.image.Image;
  * Interface
  */
 public interface ISensor {
-    static final int minTemp=-20;
-    static final int maxTemp=40;
+    static final int MIN_TEMP =-20;
+    static final int MAX_TEMP =40;
+    static final double ZERO_PROGB = 0.5;
+    static final String SNOW = "/ressources/flocon.png" ;
+    static final String SUN = "/ressources/sun.png";
+    static final String CLOUD = "/ressources/cloud.png";
+
+
 
     /**
      * @return the path of the selected image
@@ -20,7 +26,7 @@ public interface ISensor {
     public String getPathImg();
     /**
      * set the path of the image
-     * @param path is the relative path in the ressources directory to pick the image
+     * @param temp is the actual température to generate the image's path
      */
      public void setPathImg(double temp);
     /**

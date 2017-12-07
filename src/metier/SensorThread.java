@@ -3,6 +3,7 @@ package metier;
 import static metier.ThreadManager.addThread;
 
 public class SensorThread extends Thread {
+    static final int REFRESHRATE = 1000;
     private ISensor sensor;
     public SensorThread(ISensor joinedSensor){
         this.sensor=joinedSensor;
@@ -12,7 +13,7 @@ public class SensorThread extends Thread {
     public void run(){
         try{
             while(true){
-                this.sleep(1000);
+                this.sleep(REFRESHRATE);
                 sensor.update();
             }
         }

@@ -9,10 +9,6 @@ import static java.lang.Math.abs;
 
 public class SimpleSensor implements ISensor {
     private int refreshRate;
-    static final double ZERO_PROGB = 0.5;
-    static final String SNOW = "/ressources/flocon.png" ;
-    static final String SUN = "/ressources/sun.png";
-    static final String CLOUD = "/ressources/cloud.png";
 
     private StringProperty pathImg = new SimpleStringProperty();
     private StringProperty name=new SimpleStringProperty();
@@ -56,8 +52,8 @@ public class SimpleSensor implements ISensor {
         this.progressTemperature.set(temp);
     }
     public void setPathImg(double temp) {
-        if(temp>=10) this.pathImg.set(SUN);
-        if(temp>=0 && getTemperature()<10)this.pathImg.setValue(CLOUD) ;
+        if(temp>=20) this.pathImg.set(SUN);
+        if(temp>=0 && temp<20)this.pathImg.setValue(CLOUD) ;
         if(temp<0)this.pathImg.set(SNOW);
     }
     public void setImage(Image img) {

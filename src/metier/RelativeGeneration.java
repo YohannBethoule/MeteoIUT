@@ -1,14 +1,14 @@
 package metier;
 
-import static metier.ISensor.maxTemp;
-import static metier.ISensor.minTemp;
+import static metier.ISensor.MAX_TEMP;
+import static metier.ISensor.MIN_TEMP;
 
 public class RelativeGeneration implements ITemperatureGenerator {
     private int min, max;
 
     public RelativeGeneration(int oldTemp, int interval){
-        this.min=Math.max(oldTemp-interval, minTemp);
-        this.max=Math.min(oldTemp+interval, maxTemp);
+        this.min=Math.max(oldTemp-interval, MIN_TEMP);
+        this.max=Math.min(oldTemp+interval, MAX_TEMP);
     }
 
     @Override

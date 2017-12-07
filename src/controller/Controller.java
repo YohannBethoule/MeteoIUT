@@ -33,7 +33,6 @@ public class Controller implements Initializable{
     @FXML    Tab tabDigits;
     @FXML    HBox contentDigital;
     @FXML    Label lbDigital;
-    @FXML    Button updateButton;
     @FXML    Tab tabThermometer;
     @FXML    ProgressBar thermometer;
     @FXML    Tab tabIcone;
@@ -113,8 +112,4 @@ public class Controller implements Initializable{
         lbIndicator.textProperty().bind(newValue.temperatureProperty().asString());
     }
 
-    @FXML
-    public void updateSensor(){
-        listSensors.getSelectionModel().getSelectedItem().update();
-    }
 }
