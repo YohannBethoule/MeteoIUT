@@ -35,7 +35,8 @@ public class SimpleSensor implements ISensor {
     public String getName() { return name.get(); }
     public Double getTemperature(){ return temperature.get(); }
     public String getPathImg() {
-        return pathImg.get();    }
+        return pathImg.get();
+    }
     public double getProgressTemperature(){ return progressTemperature.get(); }
 
     public void setTemperature(double temperature) {

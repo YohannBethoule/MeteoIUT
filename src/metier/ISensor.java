@@ -22,7 +22,7 @@ public interface ISensor {
      * set the path of the image
      * @param path is the relative path in the ressources directory to pick the image
      */
-    public void setPathImg(double temp);
+     public void setPathImg(double temp);
     /**
      *
      * @return the Image of the Property.
@@ -66,9 +66,9 @@ public interface ISensor {
     public StringProperty nameProperty() ;
     /**
      * Change the name of the sensor.
-     * @param Name the new name of the sensor
+     * @param name the new name of the sensor
      */
-    public void setName(String Name);
+    public void setName(String name);
     /**
      *
      * @return the current temperature of the sensor
@@ -81,9 +81,9 @@ public interface ISensor {
     public DoubleProperty temperatureProperty();
     /**
      * Change the temperature of the sensor.
-     * @param temperature the new value for the temperature
+     * @param temp the new value for the temperature
      */
-    void setTemperature(double temperature);
+    void setTemperature(double temp);
 
     /**
      * Update the temperature of the sensor, with the strategy implemented by the class.
