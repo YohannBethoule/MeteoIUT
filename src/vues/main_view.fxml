@@ -61,7 +61,6 @@
     <right>
         <VBox alignment="CENTER">
             <children>
-                <Button fx:id="updateButton" onAction="#updateSensor" text="Mettre à jour le capteur"/>
                 <Button fx:id="changeGenerationButton" onAction="#changeGeneration" text="Choisir une méthode de génération"/>
             </children>
         </VBox>
