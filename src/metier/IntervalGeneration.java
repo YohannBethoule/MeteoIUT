@@ -3,9 +3,7 @@ package metier;
 import static metier.ISensor.MAX_TEMP;
 import static metier.ISensor.MIN_TEMP;
 
-public class IntervalGeneration implements  ITemperatureGenerator{
-    private int min;
-    private int max;
+public class IntervalGeneration extends ITemperatureGenerator{
 
     public IntervalGeneration(){
         this.min= MIN_TEMP;

@@ -26,10 +26,10 @@ import metier.*;
 public class Controller implements Initializable{
     static final String baseName="Sensor N°";
 
-    ObservableList<ISensor> sensors= FXCollections.observableArrayList();
-    private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
+    ObservableList<DisplaySensor> sensors= FXCollections.observableArrayList();
+    private ListProperty<DisplaySensor> lSensors=new SimpleListProperty<>(sensors);
 
-    @FXML    private ListView<ISensor> listSensors=new ListView<>();
+    @FXML    private ListView<DisplaySensor> listSensors=new ListView<>();
     @FXML    Tab tabDigits;
     @FXML    HBox contentDigital;
     @FXML    Label lbDigital;
@@ -46,12 +46,12 @@ public class Controller implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         listSensors.itemsProperty().bind(lSensors);
 
-        listSensors.setCellFactory(unused -> new ListCell<ISensor>(){
+        listSensors.setCellFactory(unused -> new ListCell<DisplaySensor>(){
             @Override
-            protected void updateItem(ISensor item, boolean empty) {
+            protected void updateItem(DisplaySensor item, boolean empty) {
                 super.updateItem(item, empty);
                 if(!isEmpty()){
-                    textProperty().bind(item.nameProperty());
+                    textProperty().bind(item.getISensor().nameProperty());
                 }else{
                     textProperty().unbind();
                     textProperty().setValue(null);
@@ -60,9 +60,9 @@ public class Controller implements Initializable{
         });
 
         listSensors.getSelectionModel().selectedItemProperty()
-                .addListener(new ChangeListener<ISensor>() {
-                    public void changed(ObservableValue<? extends ISensor> observable,
-                                        ISensor oldValue, ISensor newValue) {
+                .addListener(new ChangeListener<DisplaySensor>() {
+                    public void changed(ObservableValue<? extends DisplaySensor> observable,
+                                        DisplaySensor oldValue, DisplaySensor newValue) {
                         if(oldValue!=null)
                             unbindDetail(oldValue);
                         if(newValue!=null)
@@ -89,27 +89,33 @@ public class Controller implements Initializable{
 
     }
 
+    //ECHEC DE TRANSTYPAGE, displayingSensor , JE N'ARRIVE PAS A GENERALISE
+    // A LA CLASSE MERE POUR TOUS LES DISPLAY;
+    // SI ON INSTANCIE AVANT CHAQUE BINDING DANS BINDDETAIL()
+    // ON ARRIVE A BIND LA TOUTE PREMIERE VALEUR;
     @FXML
     public void newSensor(){
         String name=baseName+((List)sensors).size();
         ISensor c=new SimpleSensor(name, 10);
-        sensors.add(c);
+        DisplaySensor displayingSensor=new IconeDisplay(c);
+        sensors.add(displayingSensor);
         SensorThread initializedThread = new SensorThread(c);
         initializedThread.start();
     }
 
-    public void unbindDetail(ISensor oldValue){
+    public void unbindDetail(DisplaySensor oldValue){
         lbDigital.textProperty().unbind();
-        thermometer.progressProperty().unbind();
-        imgThermo.imageProperty().unbind();
         lbIndicator.textProperty().unbind();
+        imgThermo.imageProperty().unbind();
+        thermometer.progressProperty().unbind();
     }
+    public void bindDetail(DisplaySensor newValue){
+        lbDigital.textProperty().bind(newValue.getISensor().temperatureProperty().asString());
+        lbIndicator.textProperty().bind(newValue.getISensor().temperatureProperty().asString());
+        imgThermo.imageProperty().bind(newValue.display());
+        thermometer.progressProperty().bind(newValue.display());
 
-    public void bindDetail(ISensor newValue){
-        lbDigital.textProperty().bind(newValue.temperatureProperty().asString());
-        thermometer.progressProperty().bind(newValue.progressTemperatureProperty());
-        imgThermo.imageProperty().bind(newValue.imageProperty());
-        lbIndicator.textProperty().bind(newValue.temperatureProperty().asString());
+
     }
 
 }

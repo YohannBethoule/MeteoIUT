@@ -20,47 +20,7 @@ public interface ISensor {
 
 
 
-    /**
-     * @return the path of the selected image
-     */
-    public String getPathImg();
-    /**
-     * set the path of the image
-     * @param temp is the actual température to generate the image's path
-     */
-     public void setPathImg(double temp);
-    /**
-     *
-     * @return the Image of the Property.
-     */
-    public Image getImage();
-    /**
-     * Create a new image with different path and set it on the Property.
-     */
-    public void setImage(Image img);
-    /**
-     *
-     * @return a StringProperty which gives the path of the image
-     */
-    public StringProperty pathImgProperty();
-    /**
-    * @return the Image as a Imageproperty.
-     */
-    public ObjectProperty<Image> imageProperty();
-    /**
-     * Change the temperature of the sensor for displaying in a progessBar.
-     */
-    public void setProgressTemperature(double temp);
-    /**
-     *
-     * @return the progressBar temperature as a DoubleProperty.
-     */
-    public DoubleProperty progressTemperatureProperty();
-    /**
-     *
-     * @return the progressBar temperature as a double
-     */
-    public double getProgressTemperature();
+
     /**
      * @return the name of the sensor
      */

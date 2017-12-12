@@ -1,5 +1,7 @@
 package metier;
 
-public interface ITemperatureGenerator {
-    public double generateTemperature();
+public abstract class ITemperatureGenerator {
+    protected int min;
+    protected int max;
+    public abstract double generateTemperature();
 }
