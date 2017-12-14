@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
+import metier.Sensor.ISensor;
 
 public class IconeDisplay extends DisplaySensor {
     static final String SNOW = "/ressources/flocon.png" ;

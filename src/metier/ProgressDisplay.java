@@ -3,6 +3,7 @@ package metier;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import metier.Sensor.ISensor;
 
 import static java.lang.Math.abs;
 

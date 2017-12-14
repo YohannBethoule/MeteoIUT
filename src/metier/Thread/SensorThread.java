@@ -1,19 +1,24 @@
-package metier;
+package metier.Thread;
 
-import static metier.ThreadManager.addThread;
+import metier.Sensor.ISensor;
+
+import static metier.Thread.ThreadManager.addThread;
 
 public class SensorThread extends Thread {
-    static final int REFRESHRATE = 1000;
     private ISensor sensor;
-    public SensorThread(ISensor joinedSensor){
+    private int refreshRate;
+
+    public SensorThread(ISensor joinedSensor, int refreshRate){
         this.sensor=joinedSensor;
         addThread(this);
+        this.refreshRate=refreshRate;
     }
+
     @Override
     public void run(){
         try{
             while(true){
-                this.sleep(REFRESHRATE);
+                this.sleep(refreshRate*1000);
                 sensor.update();
             }
         }

@@ -1,9 +1,14 @@
 package metier;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import metier.Sensor.ISensor;
 
-public abstract class DisplaySensor {
+public abstract class DisplaySensor{
     protected ISensor displayedSensor;
+    protected StringProperty name=new SimpleStringProperty();
+
 
     public ISensor getISensor(){
         return displayedSensor;

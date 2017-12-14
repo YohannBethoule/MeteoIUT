@@ -20,7 +20,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import metier.*;
-
+import metier.Sensor.ISensor;
+import metier.Sensor.SimpleSensor;
+import metier.Thread.SensorThread;
 
 
 public class Controller implements Initializable{
@@ -97,7 +99,7 @@ public class Controller implements Initializable{
     public void newSensor(){
         String name=baseName+((List)sensors).size();
         ISensor c=new SimpleSensor(name, 10);
-        DisplaySensor displayingSensor=new IconeDisplay(c);
+        DisplaySensor displayingSensor=new ProgressDisplay(c);
         sensors.add(displayingSensor);
         SensorThread initializedThread = new SensorThread(c);
         initializedThread.start();
@@ -112,9 +114,8 @@ public class Controller implements Initializable{
     public void bindDetail(DisplaySensor newValue){
         lbDigital.textProperty().bind(newValue.getISensor().temperatureProperty().asString());
         lbIndicator.textProperty().bind(newValue.getISensor().temperatureProperty().asString());
-        imgThermo.imageProperty().bind(newValue.display());
+       // imgThermo.imageProperty().bind(newValue.display());
         thermometer.progressProperty().bind(newValue.display());
-
 
     }
 
