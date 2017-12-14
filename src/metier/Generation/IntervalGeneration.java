@@ -1,7 +1,10 @@
 package metier.Generation;
 
 
-public class IntervalGeneration extends ITemperatureGenerator{
+public class IntervalGeneration implements ITemperatureGenerator{
+    private int min;
+    private int max;
+
     public IntervalGeneration(){
         this.min= MIN_TEMP;
         this.max= MAX_TEMP;

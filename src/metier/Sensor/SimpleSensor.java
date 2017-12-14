@@ -7,7 +7,7 @@ import metier.Generation.IntervalGeneration;
 
 import static java.lang.Math.abs;
 
-public class SimpleSensor implements ISensor {
+public class SimpleSensor extends ISensor {
 
     private StringProperty name=new SimpleStringProperty();
     private DoubleProperty temperature=new SimpleDoubleProperty();
@@ -20,22 +20,11 @@ public class SimpleSensor implements ISensor {
         update();
     }
 
-    public String getName() { return name.get(); }
-    public double getTemperature(){ return temperature.get(); }
-
     public void setTemperature(double temperature) {
         Platform.runLater(()->{
             this.temperature.set(temperature);
         });
     }
-    public void setName(String name) {
-        this.name.set(name);
-    }
-
-    public StringProperty nameProperty() {
-        return name;
-    }
-    public DoubleProperty temperatureProperty(){ return temperature; }
 
     @Override
     public void update(){
