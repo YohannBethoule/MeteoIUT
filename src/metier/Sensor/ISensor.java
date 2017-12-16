@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
  * Interface
  */
 public abstract class ISensor {
-    private StringProperty name=new SimpleStringProperty();
+    protected StringProperty name=new SimpleStringProperty();
     private DoubleProperty temperature=new SimpleDoubleProperty();
 
     /**

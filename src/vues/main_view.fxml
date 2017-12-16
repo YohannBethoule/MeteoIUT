@@ -25,38 +25,18 @@
     </left>
 
     <top>
-
     </top>
     <center>
-        <TabPane BorderPane.alignment="CENTER_LEFT">
-            <Tab fx:id="tabDigits" text="Numerique"></Tab>
-            <Tab fx:id="tabThermometer" text="Thermometre"></Tab>
-            <Tab fx:id="tabIcone" text="Icones"></Tab>
-        </TabPane>
+        <HBox BorderPane.alignment = "CENTER" >
+            <Button onAction="#digitalView" text="Digital"  />
+            <Button onAction="#iconeView" text="Icone" />
+            <Button onAction="#thermometerView" text="Thermomètre" />
+        </HBox>
     </center>
 
     <bottom>
         <Button onAction="#newSensor" text="Instancier un capteur" BorderPane.alignment="CENTER" />
     </bottom>
-    <HBox fx:id="contentDigital" alignment="CENTER">
-        <Label fx:id="lbDigital" textFill="RED">
-            <font>
-                <Font size="50" />
-            </font>
-        </Label>
-        <Label text="°C" textFill="RED"/>
-    </HBox>
-
-
-    <ProgressBar fx:id="thermometer"  prefWidth="200.0" rotate="-90"/>
-    <VBox fx:id="contentImg" alignment="CENTER">
-        <HBox alignment="CENTER">
-            <Label fx:id="lbIndicator"/>
-            <Label text="°C"/>
-        </HBox>
-        <ImageView fx:id="imgThermo" />
-    </VBox>
-
 
     <right>
         <VBox alignment="CENTER">

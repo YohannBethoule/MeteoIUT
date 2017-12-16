@@ -9,7 +9,6 @@ import static java.lang.Math.abs;
 
 public class SimpleSensor extends ISensor {
 
-    private StringProperty name=new SimpleStringProperty();
     private DoubleProperty temperature=new SimpleDoubleProperty();
 
     private ITemperatureGenerator tempGenerator;
