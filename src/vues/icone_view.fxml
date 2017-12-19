@@ -20,22 +20,22 @@
             xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerIcone">
 
     <top>
-    <Label fx:id="lbName"/>
     </top>
     <center>
 
+        <VBox alignment="CENTER">
+            <Label fx:id="lbName" />
+            <HBox alignment="CENTER">
+                <Label fx:id="lbIndicator"/>
+                <Label text="°C"/>
+            </HBox>
+            <ImageView fx:id="imgThermo" />
+        </VBox>
     </center>
 
     <bottom>
     </bottom>
 
-    <VBox fx:id="contentImg" alignment="CENTER">
-        <HBox alignment="CENTER">
-            <Label fx:id="lbIndicator"/>
-            <Label text="°C"/>
-        </HBox>
-        <ImageView fx:id="imgThermo" />
-    </VBox>
 
     <right>
     </right>

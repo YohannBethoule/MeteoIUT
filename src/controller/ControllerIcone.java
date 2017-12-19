@@ -4,9 +4,12 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import metier.Sensor.ISensor;
+import javafx.scene.image.ImageView;
+import metier.sensor.ISensor;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +20,10 @@ public class ControllerIcone implements Initializable {
     static final String CLOUD = "/ressources/cloud.png";
 
     ISensor sensor;
+
+    @FXML ImageView imgThermo;
+    @FXML Label lbName;
+    @FXML Label lbIndicator;
 
     private ObjectProperty<Image> image= new SimpleObjectProperty<Image>();
     private StringProperty pathImg = new SimpleStringProperty();
@@ -48,6 +55,12 @@ public class ControllerIcone implements Initializable {
 
     public void setSensor(ISensor sensor) {
         this.sensor = sensor;
+
+        setPathImg(sensor.getTemperature());
+        setImage(new Image(getPathImg()));
+        lbName.textProperty().bind(sensor.nameProperty());
+        lbIndicator.textProperty().bind(sensor.temperatureProperty().asString());
+        imgThermo.imageProperty().bind(imageProperty());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package metier.Generation;
+package metier.generation;
 
 public class RelativeGeneration implements ITemperatureGenerator {
     private int min;

@@ -20,22 +20,26 @@
             xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerDigital">
 
     <top>
-    <Label fx:id="lbName"/>
+
     </top>
-    <center>
+    <center >
+        <VBox alignment="CENTER">
+            <Label fx:id="lbName"/>
+            <HBox alignment="CENTER">
+                <Label fx:id="lbDigital" textFill="RED">
+                    <font>
+                        <Font size="50" />
+                    </font>
+                </Label>
+                <Label text="°C" textFill="RED"/>
+            </HBox>
+        </VBox>
 
     </center>
 
     <bottom>
     </bottom>
-    <HBox fx:id="contentDigital" alignment="CENTER">
-        <Label fx:id="lbDigital" textFill="RED">
-            <font>
-                <Font size="50" />
-            </font>
-        </Label>
-        <Label text="°C" textFill="RED"/>
-    </HBox>
+
 
     <right>
     </right>

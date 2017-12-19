@@ -1,8 +1,7 @@
-package metier.Sensor;
+package metier.sensor;
 
 import javafx.beans.property.*;
 import javafx.beans.property.DoubleProperty;
-import javafx.scene.image.Image;
 
 /**
  * @author Lulauriche et Yobethoule

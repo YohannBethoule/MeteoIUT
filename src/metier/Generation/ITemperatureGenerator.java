@@ -1,4 +1,4 @@
-package metier.Generation;
+package metier.generation;
 
 public interface ITemperatureGenerator {
     static final int MIN_TEMP =-20;
