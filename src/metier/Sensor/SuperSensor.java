@@ -12,8 +12,8 @@ import java.util.Map;
 public class SuperSensor extends ISensor{
     private Map<ISensor, Integer> sensors;
 
-    public SuperSensor(String name, ITemperatureGenerator temperatureGenerator){
-        super(name,temperatureGenerator);
+    public SuperSensor(String name){
+        super(name);
         sensors=new HashMap<>();
     }
 
@@ -29,8 +29,8 @@ public class SuperSensor extends ISensor{
         setTemperature(total/count);
     }
 
-    public void addSensor(ISensor s, int coeff){
-        sensors.put(s, coeff);
+    public void addSensor(ISensor s, int weight){
+        sensors.put(s, weight);
     }
 
     public void deleteSensor(ISensor s){

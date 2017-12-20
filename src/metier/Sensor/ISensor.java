@@ -11,12 +11,9 @@ import metier.generation.ITemperatureGenerator;
 public abstract class ISensor {
     protected StringProperty name=new SimpleStringProperty();
     protected DoubleProperty temperature=new SimpleDoubleProperty();
-    protected ITemperatureGenerator tempGenerator;
 
-
-    public ISensor(String name,ITemperatureGenerator chooseElement){
+    public ISensor(String name){
         this.name.set(name);
-        tempGenerator=chooseElement;
     }
 
     /**

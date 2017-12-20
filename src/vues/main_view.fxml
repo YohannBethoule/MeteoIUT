@@ -20,7 +20,7 @@
     <top>
     </top>
     <center>
-        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
             <HBox alignment="CENTER" >
                 <Button onAction="#digitalView" text="Digital" />
                 <Button onAction="#iconeView" text="Icone" />
@@ -38,11 +38,14 @@
     </center>
 
     <bottom>
-        <Button onAction="#newSensor" text="Instancier un capteur" BorderPane.alignment="CENTER" />
+        <HBox alignment="CENTER">
+            <Button onAction="#newSensor" text="Intancier un capteur"  />
+            <Button onAction="#newSuperSensor" text="Intancier un Super capteur !" />
+        </HBox>
     </bottom>
 
     <right>
-        <VBox alignment="BOTTOM_CENTER">
+        <VBox alignment="CENTER">
             <children>
             <MenuButton fx:id="choiceGenerator" mnemonicParsing="false" text="Choisir une méthode de génération">
               <items>
@@ -51,9 +54,13 @@
                 <MenuItem onAction="#generateRandom" text="Aléatoire" />
               </items>
             </MenuButton>
-
             </children>
+            <Label text="Nombre de sous-capteurs"/>
+            <TextField fx:id="nbSensor" maxWidth="50"/>
+            <Label text="Poids de ces sous capteur?"/>
+            <TextField fx:id="weight"  maxWidth="50"/>
         </VBox>
+
     </right>
 
 

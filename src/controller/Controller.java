@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.stage.Stage;
@@ -23,12 +22,15 @@ import metier.generation.RandomGeneration;
 import metier.generation.RelativeGeneration;
 import metier.sensor.ISensor;
 import metier.sensor.SimpleSensor;
+import metier.sensor.SuperSensor;
 import metier.thread.SensorThread;
 
 
 public class Controller implements Initializable{
-    static final String baseName="Sensor N°";
+    static final String BASE_NAME ="Sensor N°";
+    static final String SUPER_NAME="[SUPER] Sensor N° ";
     static final String TITLE="Station Météo";
+    static final String ERROR_SUPER="Aucun sous capteurs attribué, calcul de température impossible";
 
     ObservableList<ISensor> sensors= FXCollections.observableArrayList();
     private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
@@ -43,6 +45,8 @@ public class Controller implements Initializable{
     @FXML Label lbIntervalRelative;
     @FXML TextField fixedTemp;
     @FXML TextField variationInterval;
+    @FXML TextField weight;
+    @FXML TextField nbSensor;
 
     private ISensor selectedSensor;
 
@@ -103,21 +107,37 @@ public class Controller implements Initializable{
     public ITemperatureGenerator changeGeneration(){
         switch(choiceGenerator.getText()){
             case "Intervalle" :
-                if(min.getText()!= null && max.getText()!= null){
-                    return new IntervalGeneration(Integer.parseInt(min.getText()),Integer.parseInt(max.getText()));
-                }
-                else return new RandomGeneration();
+                    return min.getText()!= null && max.getText()!= null || min.getText()!="" && max.getText()!="" ?
+                            new IntervalGeneration(Integer.parseInt(min.getText()),Integer.parseInt(max.getText())) : new RandomGeneration();
             case "Relative" :
-                    return new RelativeGeneration(Integer.parseInt(fixedTemp.getText()),Integer.parseInt(variationInterval.getText()));
+                    return fixedTemp.getText()!=null && variationInterval.getText()!=null || fixedTemp.getText()!="" && variationInterval.getText()!="" ?
+                            new RelativeGeneration(Integer.parseInt(fixedTemp.getText()),Integer.parseInt(variationInterval.getText())) : new RandomGeneration() ;
             default :
                     return new RandomGeneration();
 
         }
     }
+    @FXML
+    public void newSuperSensor()throws Exception{
+        String name= SUPER_NAME +(sensors.size());
+        ISensor isensor=new SuperSensor(name);;
+        if(nbSensor.getText()!=null && Integer.parseInt(nbSensor.getText())>0){
+           for(int i=0; i<Integer.parseInt(nbSensor.getText());i++){
+              // isensor.addSensor(new SimpleSensor(BASE_NAME+i,new RandomGeneration()));
+           }
+
+        }
+        else{
+            throw new Exception(ERROR_SUPER);
+        }
+        sensors.add(isensor);
+        SensorThread initializedThread = new SensorThread(isensor,1);
+        initializedThread.start();
+    }
 
     @FXML
     public void newSensor(){
-        String name=baseName+((List)sensors).size();
+        String name= BASE_NAME +(sensors.size());
         ITemperatureGenerator generator = changeGeneration();
         ISensor isensor=new SimpleSensor(name,generator);
         sensors.add(isensor);
