@@ -14,12 +14,10 @@ import metier.sensor.ISensor;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerIcone implements Initializable {
+public class ControllerIcone extends ControllerDisplay implements Initializable {
     static final String SNOW = "/ressources/flocon.png" ;
     static final String SUN = "/ressources/sun.png";
     static final String CLOUD = "/ressources/cloud.png";
-
-    ISensor sensor;
 
     @FXML ImageView imgThermo;
     @FXML Label lbName;
@@ -49,10 +47,7 @@ public class ControllerIcone implements Initializable {
         return image;
     }
 
-    public ISensor getSensor() {
-        return sensor;
-    }
-
+    @Override
     public void setSensor(ISensor sensor) {
         this.sensor = sensor;
 

@@ -9,11 +9,8 @@ import static java.lang.Math.abs;
 
 public class SimpleSensor extends ISensor {
 
-    private ITemperatureGenerator tempGenerator;
-
-    public SimpleSensor(String name){
-        this.name.set(name);
-        this.tempGenerator=new IntervalGeneration();
+    public SimpleSensor(String name,ITemperatureGenerator generator){
+        super(name,generator);
         update();
 
     }

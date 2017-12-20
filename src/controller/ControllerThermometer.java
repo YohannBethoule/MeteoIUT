@@ -13,8 +13,7 @@ import java.util.ResourceBundle;
 
 import static java.lang.Math.abs;
 
-public class ControllerThermometer implements Initializable {
-    private ISensor sensor;
+public class ControllerThermometer extends ControllerDisplay implements Initializable {
     static final double ZERO_PROGB = 0.5;
 
     @FXML ProgressBar thermometer;
@@ -35,17 +34,12 @@ public class ControllerThermometer implements Initializable {
         return progressTemperature;
     }
 
-
-    public ISensor getSensor() {
-        return sensor;
-    }
-
+    @Override
     public void setSensor(ISensor sensor) {
         this.sensor = sensor;
         setProgressTemperature(sensor.getTemperature());
         thermometer.progressProperty().bind(progressTemperatureProperty());
         lbName.textProperty().bind(sensor.nameProperty());
-
     }
 
     @Override

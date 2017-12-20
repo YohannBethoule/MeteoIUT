@@ -8,16 +8,11 @@ import metier.sensor.ISensor;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerDigital implements Initializable {
-    ISensor sensor;
+public class ControllerDigital extends ControllerDisplay implements Initializable {
 
     @FXML Label lbName;
     @FXML Label lbDigital;
 
-
-    public ISensor getSensor() {
-        return sensor;
-    }
 
     void setSensor(ISensor sensor) {
         this.sensor = sensor;

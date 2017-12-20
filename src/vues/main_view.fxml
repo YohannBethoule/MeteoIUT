@@ -41,7 +41,10 @@
     <right>
         <VBox alignment="CENTER">
             <children>
-                <Button fx:id="changeGenerationButton" onAction="#changeGeneration" text="Choisir une méthode de génération"/>
+                <Button fx:id="changeGenerationButton" onAction="#changeGeneration" text="Choisir une méthode de génération">
+
+                </Button>
+
             </children>
         </VBox>
     </right>

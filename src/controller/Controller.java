@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.stage.Stage;
+import metier.generation.IntervalGeneration;
 import metier.sensor.ISensor;
 import metier.sensor.SimpleSensor;
 import metier.thread.SensorThread;
@@ -65,12 +66,13 @@ public class Controller implements Initializable{
     @FXML
     public void changeGeneration(){
 
+
     }
 
     @FXML
     public void newSensor(){
         String name=baseName+((List)sensors).size();
-        ISensor isensor=new SimpleSensor(name);
+        ISensor isensor=new SimpleSensor(name,new IntervalGeneration());
         sensors.add(isensor);
         SensorThread initializedThread = new SensorThread(isensor,1);
         initializedThread.start();

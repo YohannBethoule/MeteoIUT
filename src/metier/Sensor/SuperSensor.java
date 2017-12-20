@@ -4,18 +4,16 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import metier.generation.ITemperatureGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class SuperSensor extends ISensor{
     private Map<ISensor, Integer> sensors;
-    private StringProperty name=new SimpleStringProperty();
-    private DoubleProperty temperature=new SimpleDoubleProperty();
 
-
-    public SuperSensor(String name){
-        setName(name);
+    public SuperSensor(String name, ITemperatureGenerator temperatureGenerator){
+        super(name,temperatureGenerator);
         sensors=new HashMap<>();
     }
 

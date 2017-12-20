@@ -2,6 +2,7 @@ package metier.sensor;
 
 import javafx.beans.property.*;
 import javafx.beans.property.DoubleProperty;
+import metier.generation.ITemperatureGenerator;
 
 /**
  * @author Lulauriche et Yobethoule
@@ -9,7 +10,14 @@ import javafx.beans.property.DoubleProperty;
  */
 public abstract class ISensor {
     protected StringProperty name=new SimpleStringProperty();
-    private DoubleProperty temperature=new SimpleDoubleProperty();
+    protected DoubleProperty temperature=new SimpleDoubleProperty();
+    protected ITemperatureGenerator tempGenerator;
+
+
+    public ISensor(String name,ITemperatureGenerator chooseElement){
+        this.name.set(name);
+        tempGenerator=chooseElement;
+    }
 
     /**
      * @return the name of the sensor
