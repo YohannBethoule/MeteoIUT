@@ -6,14 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import metier.sensor.ISensor;
-
 import java.net.URL;
 import java.util.ResourceBundle;
+import metier.sensor.ISensor;
 
 import static java.lang.Math.abs;
 
-public class ControllerThermometer extends ControllerDisplay implements Initializable {
+public class ControllerThermometer extends ControllerDisplay {
     static final double ZERO_PROGB = 0.5;
 
     @FXML ProgressBar thermometer;

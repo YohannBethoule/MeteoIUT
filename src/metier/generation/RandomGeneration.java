@@ -1,13 +1,13 @@
 package metier.generation;
 
+public class RandomGeneration  implements ITemperatureGenerator{
 
-public class IntervalGeneration implements ITemperatureGenerator{
     private int min;
     private int max;
 
-    public IntervalGeneration(int min, int max){
-        this.min=min;
-        this.max=max;
+    public RandomGeneration(){
+        this.min= MIN_TEMP;
+        this.max= MAX_TEMP;
     }
 
     @Override

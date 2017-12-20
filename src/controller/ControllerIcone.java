@@ -14,7 +14,7 @@ import metier.sensor.ISensor;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerIcone extends ControllerDisplay implements Initializable {
+public class ControllerIcone extends ControllerDisplay {
     static final String SNOW = "/ressources/flocon.png" ;
     static final String SUN = "/ressources/sun.png";
     static final String CLOUD = "/ressources/cloud.png";

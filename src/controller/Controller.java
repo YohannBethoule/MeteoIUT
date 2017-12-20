@@ -17,7 +17,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.stage.Stage;
+import metier.generation.ITemperatureGenerator;
 import metier.generation.IntervalGeneration;
+import metier.generation.RandomGeneration;
+import metier.generation.RelativeGeneration;
 import metier.sensor.ISensor;
 import metier.sensor.SimpleSensor;
 import metier.thread.SensorThread;
@@ -30,7 +33,16 @@ public class Controller implements Initializable{
     ObservableList<ISensor> sensors= FXCollections.observableArrayList();
     private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
 
-    @FXML    private ListView<ISensor> listSensors=new ListView<>();
+    @FXML private ListView<ISensor> listSensors=new ListView<>();
+    @FXML MenuButton choiceGenerator;
+    @FXML Label lbMax;
+    @FXML Label lbMin;
+    @FXML TextField max;
+    @FXML TextField min;
+    @FXML Label lbRelativeTemp;
+    @FXML Label lbIntervalRelative;
+    @FXML TextField fixedTemp;
+    @FXML TextField variationInterval;
 
     private ISensor selectedSensor;
 
@@ -61,18 +73,53 @@ public class Controller implements Initializable{
                 });
     }
 
+    private void changeIntervalVisibility(boolean bool){
+        max.setVisible(bool);
+        min.setVisible(bool);
+        lbMax.setVisible(bool);
+        lbMin.setVisible(bool);
+    }
+    private void changeRelativeVisibility(boolean bool){
+        lbRelativeTemp.setVisible(bool);
+        lbIntervalRelative.setVisible(bool);
+        fixedTemp.setVisible(bool);
+        variationInterval.setVisible(bool);
+    }
+    public void generateInterval(){
+        choiceGenerator.setText("Intervalle");
+        changeIntervalVisibility(true);
+        changeRelativeVisibility(false);
+    }
+    public void generateRelative(){
+        choiceGenerator.setText("Relative");
+        changeIntervalVisibility(false);
+        changeRelativeVisibility(true);
+    }
+    public void generateRandom(){
+        choiceGenerator.setText("Aléatoire");
+        changeIntervalVisibility(false);
+        changeRelativeVisibility(false);
+    }
+    public ITemperatureGenerator changeGeneration(){
+        switch(choiceGenerator.getText()){
+            case "Intervalle" :
+                if(min.getText()!= null && max.getText()!= null){
+                    return new IntervalGeneration(Integer.parseInt(min.getText()),Integer.parseInt(max.getText()));
+                }
+                else return new RandomGeneration();
+            case "Relative" :
+                    return new RelativeGeneration(Integer.parseInt(fixedTemp.getText()),Integer.parseInt(variationInterval.getText()));
+            default :
+                    return new RandomGeneration();
 
-
-    @FXML
-    public void changeGeneration(){
-
-
+        }
     }
 
     @FXML
     public void newSensor(){
         String name=baseName+((List)sensors).size();
-        ISensor isensor=new SimpleSensor(name,new IntervalGeneration());
+        ITemperatureGenerator generator = changeGeneration();
+        ISensor isensor=new SimpleSensor(name,generator);
         sensors.add(isensor);
         SensorThread initializedThread = new SensorThread(isensor,1);
         initializedThread.start();

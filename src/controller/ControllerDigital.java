@@ -8,7 +8,7 @@ import metier.sensor.ISensor;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerDigital extends ControllerDisplay implements Initializable {
+public class ControllerDigital extends ControllerDisplay{
 
     @FXML Label lbName;
     @FXML Label lbDigital;
