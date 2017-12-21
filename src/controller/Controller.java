@@ -31,6 +31,7 @@ public class Controller implements Initializable{
     static final String SUPER_NAME="[SUPER] Sensor N° ";
     static final String TITLE="Station Météo";
     static final String ERROR_SUPER="Aucun sous capteurs attribué, calcul de température impossible";
+    static final String SUPER_CLASS="metier.sensor.SuperSensor";
 
     ObservableList<ISensor> sensors= FXCollections.observableArrayList();
     private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
@@ -47,6 +48,10 @@ public class Controller implements Initializable{
     @FXML TextField variationInterval;
     @FXML TextField weight;
     @FXML TextField nbSensor;
+    @FXML Button addSimpleToSuper;
+    @FXML Button addSuperToSuper;
+    @FXML Label lbNbSensor;
+    @FXML Label lbWeight;
 
     private ISensor selectedSensor;
 
@@ -73,8 +78,22 @@ public class Controller implements Initializable{
                                         ISensor oldValue, ISensor newValue) {
                         if(newValue!=null)
                             selectedSensor=newValue;
+                            if(newValue.getClass().getName()==SUPER_CLASS){
+                                changeSuperVisibility(true);
+                            }
+                            else{
+                                changeSuperVisibility(false);
+                            }
                     }
                 });
+    }
+    private void changeSuperVisibility(boolean bool){
+        lbNbSensor.setVisible(bool);
+        lbWeight.setVisible(bool);
+        addSimpleToSuper.setVisible(bool);
+        addSuperToSuper.setVisible(bool);
+        weight.setVisible(bool);
+        nbSensor.setVisible(bool);
     }
 
     private void changeIntervalVisibility(boolean bool){
@@ -114,25 +133,40 @@ public class Controller implements Initializable{
                             new RelativeGeneration(Integer.parseInt(fixedTemp.getText()),Integer.parseInt(variationInterval.getText())) : new RandomGeneration() ;
             default :
                     return new RandomGeneration();
-
+        }
+    }
+    @FXML
+    public void addSimpleToSuper(){
+            newSubsSensor((SuperSensor)selectedSensor);
+    }
+    @FXML
+    public void addSuperToSuper(){
+        createSubsSuperSensor((SuperSensor)selectedSensor);
+    }
+    private void newSubsSensor(SuperSensor superSensor){
+        ITemperatureGenerator generator = changeGeneration();
+        for(int i=0; i<Integer.parseInt(nbSensor.getText());i++){
+            SimpleSensor simpleSensor = new SimpleSensor(BASE_NAME+i,generator);
+            superSensor.addSensor(simpleSensor,Integer.parseInt(weight.getText()));
+            SensorThread initializedThread = new SensorThread(simpleSensor,1);
+            initializedThread.start();
+        }
+    }
+    private void createSubsSuperSensor(SuperSensor superSensor){
+        for(int i=0; i<Integer.parseInt(nbSensor.getText());i++){
+            SuperSensor subSuper = new SuperSensor(SUPER_NAME+i);
+            superSensor.addSensor(subSuper,Integer.parseInt(weight.getText()));
+            SensorThread initializedThread = new SensorThread(subSuper,1);
+            initializedThread.start();
         }
     }
     @FXML
     public void newSuperSensor()throws Exception{
         String name= SUPER_NAME +(sensors.size());
-        ISensor isensor=new SuperSensor(name);;
-        if(nbSensor.getText()!=null && Integer.parseInt(nbSensor.getText())>0){
-           for(int i=0; i<Integer.parseInt(nbSensor.getText());i++){
-              // isensor.addSensor(new SimpleSensor(BASE_NAME+i,new RandomGeneration()));
-           }
-
-        }
-        else{
-            throw new Exception(ERROR_SUPER);
-        }
-        sensors.add(isensor);
-        SensorThread initializedThread = new SensorThread(isensor,1);
-        initializedThread.start();
+        SuperSensor superSensor=new SuperSensor(name);
+        sensors.add(superSensor);
+        SensorThread initializedSuperThread = new SensorThread(superSensor,1);
+        initializedSuperThread.start();
     }
 
     @FXML
