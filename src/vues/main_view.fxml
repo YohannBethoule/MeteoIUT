@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.text.Font?>
-<?import controller.Controller?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.*?>
-<?import java.lang.*?>
 
-
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.image.ImageView?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<?import javafx.scene.control.Label?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
 
 
     <left>
@@ -27,23 +20,47 @@
     <top>
     </top>
     <center>
-        <HBox BorderPane.alignment = "CENTER" >
-            <Button onAction="#digitalView" text="Digital"  />
-            <Button onAction="#iconeView" text="Icone" />
-            <Button onAction="#thermometerView" text="Thermomètre" />
-        </HBox>
+        <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" >
+                <Button onAction="#digitalView" text="Digital" />
+                <Button onAction="#iconeView" text="Icone" />
+                <Button onAction="#thermometerView" text="Thermomètre" />
+            </HBox>
+            <Label fx:id="lbMin" text="Minimum :" visible="false"/>
+            <TextField fx:id="min" visible="false"  maxWidth="100"/>
+            <Label fx:id="lbMax" text="Maximum : " visible="false"/>
+            <TextField fx:id="max" visible="false" maxWidth="100"/>
+            <Label fx:id="lbRelativeTemp" visible="false" text="Votre température ?"/>
+            <TextField fx:id="fixedTemp" visible="false" maxWidth="100"/>
+            <Label fx:id="lbIntervalRelative" visible="false" text="Ecart de variation ?"/>
+            <TextField fx:id="variationInterval" visible="false" maxWidth="100"/>
+        </VBox>
     </center>
 
     <bottom>
-        <Button onAction="#newSensor" text="Instancier un capteur" BorderPane.alignment="CENTER" />
+        <HBox alignment="CENTER">
+            <Button onAction="#newSensor" text="Intancier un capteur"  />
+            <Button onAction="#newSuperSensor" text="Intancier un Super capteur !" />
+        </HBox>
     </bottom>
 
     <right>
         <VBox alignment="CENTER">
             <children>
-                <Button fx:id="changeGenerationButton" onAction="#changeGeneration" text="Choisir une méthode de génération"/>
+            <MenuButton fx:id="choiceGenerator" mnemonicParsing="false" text="Choisir une méthode de génération">
+              <items>
+                <MenuItem onAction="#generateInterval" text="Intervalle" />
+                <MenuItem onAction="#generateRelative" text="Relative" />
+                <MenuItem onAction="#generateRandom" text="Aléatoire" />
+              </items>
+            </MenuButton>
             </children>
+            <Label text="Nombre de sous-capteurs"/>
+            <TextField fx:id="nbSensor" maxWidth="50"/>
+            <Label text="Poids de ces sous capteur?"/>
+            <TextField fx:id="weight"  maxWidth="50"/>
         </VBox>
+
     </right>
 
 

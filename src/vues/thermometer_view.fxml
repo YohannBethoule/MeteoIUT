@@ -20,16 +20,14 @@
             xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerThermometer">
 
     <top>
-    <Label fx:id="lbName"/>
+    <Label fx:id="lbName" BorderPane.alignment="CENTER"/>
     </top>
     <center>
-
+        <ProgressBar fx:id="thermometer"  prefWidth="200.0" rotate="-90"/>
     </center>
 
     <bottom>
     </bottom>
-
-    <ProgressBar fx:id="thermometer"  prefWidth="200.0" rotate="-90"/>
 
     <right>
     </right>

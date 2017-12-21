@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import static metier.Thread.ThreadManager.stopThread;
+import static metier.thread.ThreadManager.stopThread;
 
 public class Main extends Application {
 

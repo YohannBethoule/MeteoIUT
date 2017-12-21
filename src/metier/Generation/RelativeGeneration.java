@@ -1,12 +1,12 @@
-package metier.Generation;
+package metier.generation;
 
 public class RelativeGeneration implements ITemperatureGenerator {
     private int min;
     private int max;
 
     public RelativeGeneration(int oldTemp, int interval){
-        this.min=Math.max(oldTemp-interval, MIN_TEMP);
-        this.max=Math.min(oldTemp+interval, MAX_TEMP);
+        this.min=oldTemp-interval;
+        this.max=oldTemp+interval;
     }
 
     @Override

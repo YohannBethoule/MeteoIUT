@@ -1,8 +1,8 @@
-package metier.Sensor;
+package metier.sensor;
 
 import javafx.beans.property.*;
 import javafx.beans.property.DoubleProperty;
-import javafx.scene.image.Image;
+import metier.generation.ITemperatureGenerator;
 
 /**
  * @author Lulauriche et Yobethoule
@@ -10,7 +10,11 @@ import javafx.scene.image.Image;
  */
 public abstract class ISensor {
     protected StringProperty name=new SimpleStringProperty();
-    private DoubleProperty temperature=new SimpleDoubleProperty();
+    protected DoubleProperty temperature=new SimpleDoubleProperty();
+
+    public ISensor(String name){
+        this.name.set(name);
+    }
 
     /**
      * @return the name of the sensor

@@ -1,8 +1,9 @@
-package metier.Thread;
+package metier.thread;
 
-import metier.Sensor.ISensor;
+import javafx.application.Platform;
+import metier.sensor.ISensor;
 
-import static metier.Thread.ThreadManager.addThread;
+import static metier.thread.ThreadManager.addThread;
 
 public class SensorThread extends Thread {
     private ISensor sensor;
@@ -13,13 +14,13 @@ public class SensorThread extends Thread {
         addThread(this);
         this.refreshRate=refreshRate;
     }
-
     @Override
     public void run(){
         try{
             while(true){
                 this.sleep(refreshRate*1000);
-                sensor.update();
+                Platform.runLater(()->
+                sensor.update());
             }
         }
         catch (InterruptedException e){

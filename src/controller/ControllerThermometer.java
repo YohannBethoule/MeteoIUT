@@ -2,28 +2,31 @@ package controller;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import metier.Sensor.ISensor;
-
+import javafx.scene.control.Cell;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import java.net.URL;
 import java.util.ResourceBundle;
+import metier.sensor.ISensor;
 
 import static java.lang.Math.abs;
 
-public class ControllerThermometer implements Initializable {
-    private ISensor selectedSensor;
+public class ControllerThermometer extends ControllerDisplay {
     static final double ZERO_PROGB = 0.5;
 
-    ISensor sensor;
+    @FXML ProgressBar thermometer;
+    @FXML Label lbName;
 
     private DoubleProperty progressTemperature=new SimpleDoubleProperty();
 
     public double getProgressTemperature(){ return progressTemperature.get(); }
     public void setProgressTemperature(double temp) {
-        if(selectedSensor.getTemperature()<0){
-            temp=ZERO_PROGB-abs(selectedSensor.getTemperature()/100);
+        if(temp<0){
+            temp=ZERO_PROGB-abs(temp/100);
         }
-        temp= (selectedSensor.getTemperature()/100.0)+ZERO_PROGB;
+        temp= (temp/100.0)+ZERO_PROGB;
         if(temp >=1){temp=1;}
         this.progressTemperature.set(temp);
     }
@@ -31,13 +34,12 @@ public class ControllerThermometer implements Initializable {
         return progressTemperature;
     }
 
-
-    public ISensor getSensor() {
-        return sensor;
-    }
-
+    @Override
     public void setSensor(ISensor sensor) {
         this.sensor = sensor;
+        setProgressTemperature(sensor.getTemperature());
+        thermometer.progressProperty().bind(progressTemperatureProperty());
+        lbName.textProperty().bind(sensor.nameProperty());
     }
 
     @Override
