@@ -27,8 +27,8 @@ import metier.thread.SensorThread;
 
 
 public class Controller implements Initializable{
-    static final String BASE_NAME ="Sensor N°";
-    static final String SUPER_NAME="[SUPER] Sensor N° ";
+
+
     static final String TITLE="Station Météo";
     static final String ERROR_SUPER="Aucun sous capteurs attribué, calcul de température impossible";
 
@@ -36,15 +36,7 @@ public class Controller implements Initializable{
     private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
 
     @FXML private ListView<ISensor> listSensors=new ListView<>();
-    @FXML MenuButton choiceGenerator;
-    @FXML Label lbMax;
-    @FXML Label lbMin;
-    @FXML TextField max;
-    @FXML TextField min;
-    @FXML Label lbRelativeTemp;
-    @FXML Label lbIntervalRelative;
-    @FXML TextField fixedTemp;
-    @FXML TextField variationInterval;
+
     @FXML TextField weight;
     @FXML TextField nbSensor;
 
@@ -77,72 +69,36 @@ public class Controller implements Initializable{
                 });
     }
 
-    private void changeIntervalVisibility(boolean bool){
-        max.setVisible(bool);
-        min.setVisible(bool);
-        lbMax.setVisible(bool);
-        lbMin.setVisible(bool);
-    }
-    private void changeRelativeVisibility(boolean bool){
-        lbRelativeTemp.setVisible(bool);
-        lbIntervalRelative.setVisible(bool);
-        fixedTemp.setVisible(bool);
-        variationInterval.setVisible(bool);
-    }
-    public void generateInterval(){
-        choiceGenerator.setText("Intervalle");
-        changeIntervalVisibility(true);
-        changeRelativeVisibility(false);
-    }
-    public void generateRelative(){
-        choiceGenerator.setText("Relative");
-        changeIntervalVisibility(false);
-        changeRelativeVisibility(true);
-    }
-    public void generateRandom(){
-        choiceGenerator.setText("Aléatoire");
-        changeIntervalVisibility(false);
-        changeRelativeVisibility(false);
-    }
-    public ITemperatureGenerator changeGeneration(){
-        switch(choiceGenerator.getText()){
-            case "Intervalle" :
-                    return min.getText()!= null && max.getText()!= null || min.getText()!="" && max.getText()!="" ?
-                            new IntervalGeneration(Integer.parseInt(min.getText()),Integer.parseInt(max.getText())) : new RandomGeneration();
-            case "Relative" :
-                    return fixedTemp.getText()!=null && variationInterval.getText()!=null || fixedTemp.getText()!="" && variationInterval.getText()!="" ?
-                            new RelativeGeneration(Integer.parseInt(fixedTemp.getText()),Integer.parseInt(variationInterval.getText())) : new RandomGeneration() ;
-            default :
-                    return new RandomGeneration();
 
-        }
-    }
+
     @FXML
     public void newSuperSensor()throws Exception{
-        String name= SUPER_NAME +(sensors.size());
-        ISensor isensor=new SuperSensor(name);;
-        if(nbSensor.getText()!=null && Integer.parseInt(nbSensor.getText())>0){
-           for(int i=0; i<Integer.parseInt(nbSensor.getText());i++){
-              // isensor.addSensor(new SimpleSensor(BASE_NAME+i,new RandomGeneration()));
-           }
+        Stage stage=new Stage();
+        SuperSensorCreation ctrlCreation;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/supersensor_creation.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        ctrlCreation=loader.getController();
+        ctrlCreation.setSensors(sensors);
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.setTitle(TITLE);
+        stage.show();
 
-        }
-        else{
-            throw new Exception(ERROR_SUPER);
-        }
-        sensors.add(isensor);
-        SensorThread initializedThread = new SensorThread(isensor,1);
-        initializedThread.start();
+
     }
 
     @FXML
-    public void newSensor(){
-        String name= BASE_NAME +(sensors.size());
-        ITemperatureGenerator generator = changeGeneration();
-        ISensor isensor=new SimpleSensor(name,generator);
-        sensors.add(isensor);
-        SensorThread initializedThread = new SensorThread(isensor,1);
-        initializedThread.start();
+    public void newSensor() throws Exception{
+        Stage stage=new Stage();
+        SensorCreation ctrlCreation;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vues/sensor_creation.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        ctrlCreation=loader.getController();
+        ctrlCreation.setSensors(sensors);
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.setTitle(TITLE);
+        stage.show();
     }
 
     @FXML
