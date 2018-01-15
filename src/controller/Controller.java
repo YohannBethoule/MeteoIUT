@@ -31,6 +31,7 @@ public class Controller implements Initializable{
 
     static final String TITLE="Station Météo";
     static final String ERROR_SUPER="Aucun sous capteurs attribué, calcul de température impossible";
+    static final String SUPER_CLASS="metier.sensor.SuperSensor";
 
     ObservableList<ISensor> sensors= FXCollections.observableArrayList();
     private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
@@ -39,6 +40,10 @@ public class Controller implements Initializable{
 
     @FXML TextField weight;
     @FXML TextField nbSensor;
+    @FXML Button addSimpleToSuper;
+    @FXML Button addSuperToSuper;
+    @FXML Label lbNbSensor;
+    @FXML Label lbWeight;
 
     private ISensor selectedSensor;
 
@@ -65,10 +70,25 @@ public class Controller implements Initializable{
                                         ISensor oldValue, ISensor newValue) {
                         if(newValue!=null)
                             selectedSensor=newValue;
+                            if(newValue.getClass().getName()==SUPER_CLASS){
+                                changeSuperVisibility(true);
+                            }
+                            else{
+                                changeSuperVisibility(false);
+                            }
                     }
                 });
     }
+    private void changeSuperVisibility(boolean bool){
+        lbNbSensor.setVisible(bool);
+        lbWeight.setVisible(bool);
+        addSimpleToSuper.setVisible(bool);
+        addSuperToSuper.setVisible(bool);
+        weight.setVisible(bool);
+        nbSensor.setVisible(bool);
+    }
 
+<<<<<<< HEAD
 
 
     @FXML
@@ -85,6 +105,79 @@ public class Controller implements Initializable{
         stage.show();
 
 
+=======
+    private void changeIntervalVisibility(boolean bool){
+        max.setVisible(bool);
+        min.setVisible(bool);
+        lbMax.setVisible(bool);
+        lbMin.setVisible(bool);
+    }
+    private void changeRelativeVisibility(boolean bool){
+        lbRelativeTemp.setVisible(bool);
+        lbIntervalRelative.setVisible(bool);
+        fixedTemp.setVisible(bool);
+        variationInterval.setVisible(bool);
+    }
+    public void generateInterval(){
+        choiceGenerator.setText("Intervalle");
+        changeIntervalVisibility(true);
+        changeRelativeVisibility(false);
+    }
+    public void generateRelative(){
+        choiceGenerator.setText("Relative");
+        changeIntervalVisibility(false);
+        changeRelativeVisibility(true);
+    }
+    public void generateRandom(){
+        choiceGenerator.setText("Aléatoire");
+        changeIntervalVisibility(false);
+        changeRelativeVisibility(false);
+    }
+    public ITemperatureGenerator changeGeneration(){
+        switch(choiceGenerator.getText()){
+            case "Intervalle" :
+                    return min.getText()!= null && max.getText()!= null || min.getText()!="" && max.getText()!="" ?
+                            new IntervalGeneration(Integer.parseInt(min.getText()),Integer.parseInt(max.getText())) : new RandomGeneration();
+            case "Relative" :
+                    return fixedTemp.getText()!=null && variationInterval.getText()!=null || fixedTemp.getText()!="" && variationInterval.getText()!="" ?
+                            new RelativeGeneration(Integer.parseInt(fixedTemp.getText()),Integer.parseInt(variationInterval.getText())) : new RandomGeneration() ;
+            default :
+                    return new RandomGeneration();
+        }
+    }
+    @FXML
+    public void addSimpleToSuper(){
+            newSubsSensor((SuperSensor)selectedSensor);
+    }
+    @FXML
+    public void addSuperToSuper(){
+        createSubsSuperSensor((SuperSensor)selectedSensor);
+    }
+    private void newSubsSensor(SuperSensor superSensor){
+        ITemperatureGenerator generator = changeGeneration();
+        for(int i=0; i<Integer.parseInt(nbSensor.getText());i++){
+            SimpleSensor simpleSensor = new SimpleSensor(BASE_NAME+i,generator);
+            superSensor.addSensor(simpleSensor,Integer.parseInt(weight.getText()));
+            SensorThread initializedThread = new SensorThread(simpleSensor,1);
+            initializedThread.start();
+        }
+    }
+    private void createSubsSuperSensor(SuperSensor superSensor){
+        for(int i=0; i<Integer.parseInt(nbSensor.getText());i++){
+            SuperSensor subSuper = new SuperSensor(SUPER_NAME+i);
+            superSensor.addSensor(subSuper,Integer.parseInt(weight.getText()));
+            SensorThread initializedThread = new SensorThread(subSuper,1);
+            initializedThread.start();
+        }
+    }
+    @FXML
+    public void newSuperSensor()throws Exception{
+        String name= SUPER_NAME +(sensors.size());
+        SuperSensor superSensor=new SuperSensor(name);
+        sensors.add(superSensor);
+        SensorThread initializedSuperThread = new SensorThread(superSensor,1);
+        initializedSuperThread.start();
+>>>>>>> 92c26a5fe4a2d73847e37f43ce4e6ff8d7d2bec9
     }
 
     @FXML

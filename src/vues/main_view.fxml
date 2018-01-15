@@ -63,6 +63,27 @@
       <Insets bottom="20.0" top="20.0" />
    </padding>
 
+<<<<<<< HEAD
+=======
+    <right>
+        <VBox alignment="CENTER">
+            <children>
+            <MenuButton fx:id="choiceGenerator" mnemonicParsing="false" text="Choisir une méthode de génération">
+              <items>
+                <MenuItem onAction="#generateInterval" text="Intervalle" />
+                <MenuItem onAction="#generateRelative" text="Relative" />
+                <MenuItem onAction="#generateRandom" text="Aléatoire" />
+              </items>
+            </MenuButton>
+            </children>
+            <Label fx:id="lbNbSensor" text="Nombre de sous-capteurs" visible="false"/>
+            <TextField fx:id="nbSensor" maxWidth="50" visible="false"/>
+            <Label fx:id="lbWeight" text="Poids de ces sous capteur?" visible="false"/>
+            <TextField fx:id="weight"  maxWidth="50" visible="false"/>
+            <Button fx:id="addSimpleToSuper" onAction="#addSimpleToSuper" text="ajouter le/les sous capteur" visible="false"/>
+            <Button fx:id="addSuperToSuper" onAction="#addSuperToSuper" text="ajouter le/les super-capteur" visible="false"/>
+        </VBox>
+>>>>>>> 92c26a5fe4a2d73847e37f43ce4e6ff8d7d2bec9
 
 
 

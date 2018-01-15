@@ -15,7 +15,6 @@ public abstract class ISensor {
     public ISensor(String name){
         this.name.set(name);
     }
-
     /**
      * @return the name of the sensor
      */
@@ -64,7 +63,7 @@ public abstract class ISensor {
      * @param temp the new value for the temperature
      */
     void setTemperature(double temp){
-        this.temperature.set(temp);
+        this.temperature.set(Math.round(temp));
     }
 
     /**
