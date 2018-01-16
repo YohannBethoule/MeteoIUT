@@ -18,20 +18,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.stage.Stage;
 import metier.sensor.ISensor;
+import metier.serialization.Serializer;
 
 
-public class Controller implements Initializable{
-
-
+public class MainController implements Initializable{
     static final String TITLE="Station Météo";
-    static final String ERROR_SUPER="Aucun sous capteurs attribué, calcul de température impossible";
 
     ObservableList<ISensor> sensors= FXCollections.observableArrayList();
     private ListProperty<ISensor> lSensors=new SimpleListProperty<>(sensors);
+    private void setSensors(ObservableList<ISensor> sensors){this.sensors=sensors;}
 
     @FXML private ListView<ISensor> listSensors=new ListView<>();
 
@@ -139,4 +140,11 @@ public class Controller implements Initializable{
         stage.show();
     }
 
+    public void loadSensors(){
+        setSensors(FXCollections.observableList(Serializer.loadSensors()));
+    }
+
+    public void saveSensors(){
+        Serializer.saveSensors(sensors);
+    }
 }

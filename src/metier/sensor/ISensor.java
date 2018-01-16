@@ -9,8 +9,8 @@ import metier.generation.ITemperatureGenerator;
  * Interface
  */
 public abstract class ISensor {
-    protected StringProperty name=new SimpleStringProperty();
-    protected DoubleProperty temperature=new SimpleDoubleProperty();
+    protected transient StringProperty name=new SimpleStringProperty();
+    protected transient  DoubleProperty temperature=new SimpleDoubleProperty();
 
     public ISensor(String name){
         this.name.set(name);
@@ -62,7 +62,7 @@ public abstract class ISensor {
      * Change the temperature of the sensor.
      * @param temp the new value for the temperature
      */
-    void setTemperature(double temp){
+    public void setTemperature(double temp){
         this.temperature.set(Math.round(temp));
     }
 

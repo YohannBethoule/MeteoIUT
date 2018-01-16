@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * MainController of the super-sensor creation window
+ */
 public class SuperSensorCreation implements Initializable {
     static final String SUPER_NAME="[SUPER] sensor N° ";
 
@@ -28,6 +31,7 @@ public class SuperSensorCreation implements Initializable {
 
     @FXML
     VBox weightSettings;
+
 
     public void initialize(URL url, ResourceBundle rb){
         lSensors.setCellFactory(unused -> new ListCell<ISensor>(){
@@ -46,6 +50,9 @@ public class SuperSensorCreation implements Initializable {
         lsuperSensor=new ArrayList<>();
     }
 
+    /**
+     * Add a sensor to the super sensor, and display a new user control to choose the weight of the new sensor.
+     */
     public void addSensor(){
         ISensor sensor = (ISensor)lSensors.getSelectionModel().getSelectedItem();
         UCSuperSensorController uc=new UCSuperSensorController(sensor);
@@ -53,11 +60,18 @@ public class SuperSensorCreation implements Initializable {
         weightSettings.getChildren().add(uc);
     }
 
+    /**
+     * Set the list of all sensors.
+     * @param sensors the observable list of all the sensors of the application
+     */
     public void setSensors(ObservableList<ISensor> sensors){
         this.sensors=sensors;
         lSensors.setItems(this.sensors);
     }
 
+    /**
+     * Create the super sensor from the informations provided by the user controls, and add it the list of all sensors.
+     */
     public void createSuperSensor(){
         int weight;
         ISensor sensor;

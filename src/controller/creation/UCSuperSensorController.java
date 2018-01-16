@@ -30,13 +30,19 @@ public class UCSuperSensorController extends HBox {
         }
         this.sensor=sensor;
         sensorName.setText(sensor.getName());
-
+        weight.getSelectionModel().selectFirst();
     }
 
+    /**
+     * @return the sensor displayed by the user control
+     */
     public ISensor getSensor(){
         return sensor;
     }
 
+    /**
+     * @return the selected weight for the sensor
+     */
     public int getWeight() {
         return weight.getValue();
     }

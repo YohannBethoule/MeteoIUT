@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SuperSensor extends ISensor{
-    private Map<ISensor, Integer> sensors;
+    protected Map<ISensor, Integer> sensors;
 
     public SuperSensor(String name){
         super(name);
@@ -29,5 +29,9 @@ public class SuperSensor extends ISensor{
 
     public void deleteSensor(ISensor s){
         sensors.remove(s);
+    }
+
+    public Map<ISensor, Integer> getSensors(){
+        return sensors;
     }
 }

@@ -13,7 +13,7 @@ public class ControllerDigital extends ControllerDisplay{
     @FXML Label lbDigital;
 
 
-    void setSensor(ISensor sensor) {
+    public void setSensor(ISensor sensor) {
         this.sensor = sensor;
         lbName.textProperty().bind(sensor.nameProperty());
         lbDigital.textProperty().bind(sensor.temperatureProperty().asString());

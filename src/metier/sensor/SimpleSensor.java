@@ -16,7 +16,6 @@ public class SimpleSensor extends ISensor {
         super(name);
         tempGenerator = generator;
         update();
-
     }
 
     @Override
@@ -27,6 +26,10 @@ public class SimpleSensor extends ISensor {
         }
         double t = tempGenerator.generateTemperature();
         setTemperature(t);
+    }
+
+    public ITemperatureGenerator getTempGenerator(){
+        return tempGenerator;
     }
 
 }
