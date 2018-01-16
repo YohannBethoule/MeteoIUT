@@ -6,11 +6,13 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import metier.sensor.ISensor;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,45 +25,20 @@ public class ControllerIcone extends ControllerDisplay {
     @FXML Label lbName;
     @FXML Label lbIndicator;
 
-    private double temp;
-
-    private ObjectProperty<Image> image= new SimpleObjectProperty<Image>();
-    private StringProperty pathImg = new SimpleStringProperty();
-
-    public Image getImage() {
-        return image.get();
-    }
-    public String getPathImg() {
-        return pathImg.get();
-    }
-    public void setPathImg(double temp) {
-        if(temp>=20) this.pathImg.set(SUN);
-        if(temp>=0 && temp<20)this.pathImg.setValue(CLOUD) ;
-        if(temp<0)this.pathImg.set(SNOW);
-    }
-    public void setImage(Image img) {
-        this.image.set(img);
-    }
-    public StringProperty pathImgProperty(){
-        return pathImg;
-    }
-    public ObjectProperty<Image> imageProperty() {
-        return image;
-    }
-
-    @Override
-    public void setSensor(ISensor sensor) {
-        this.sensor = sensor;
-
-        setPathImg(sensor.getTemperature());
-        setImage(new Image(getPathImg()));
-        lbName.textProperty().bind(sensor.nameProperty());
-        lbIndicator.textProperty().bind(sensor.temperatureProperty().asString());
-        //imgThermo.imageProperty().bind(imageProperty());
-        Bindings.bindBidirectional(imgThermo.imageProperty(), imageProperty());
-    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void setSensor(ISensor sensor){
+        this.sensor=sensor;
+
+        lbName.textProperty().bind(this.sensor.nameProperty());
+        lbIndicator.textProperty().bind(this.sensor.temperatureProperty().asString());
+        sensor.temperatureProperty().addListener((o,oldV,newV)->{
+            if ((double) newV < 0) imgThermo.setImage(new Image(SNOW));
+            if ((double) newV > 20) imgThermo.setImage(new Image(SUN));
+            if ((double) newV >= 0 && (double) newV <= 20) imgThermo.setImage(new Image(CLOUD));
+        });
     }
 }

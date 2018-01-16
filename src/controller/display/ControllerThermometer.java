@@ -1,7 +1,5 @@
 package controller.display;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -16,7 +14,7 @@ public class ControllerThermometer extends ControllerDisplay {
 
     @FXML ProgressBar thermometer;
     @FXML Label lbName;
-
+/*
     private DoubleProperty progressTemperature=new SimpleDoubleProperty();
 
     public double getProgressTemperature(){ return progressTemperature.get(); }
@@ -31,13 +29,12 @@ public class ControllerThermometer extends ControllerDisplay {
     public DoubleProperty progressTemperatureProperty(){
         return progressTemperature;
     }
-
+*/
     @Override
     public void setSensor(ISensor sensor) {
         this.sensor = sensor;
-        setProgressTemperature(sensor.getTemperature());
-        thermometer.progressProperty().bind(progressTemperatureProperty());
-        lbName.textProperty().bind(sensor.nameProperty());
+        thermometer.progressProperty().bind(this.sensor.temperatureProperty().add(10).divide(100).multiply(2));
+        lbName.textProperty().bind(this.sensor.nameProperty());
     }
 
     @Override

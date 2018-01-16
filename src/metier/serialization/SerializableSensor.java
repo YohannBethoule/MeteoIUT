@@ -7,8 +7,6 @@ import java.io.Serializable;
 
 public class SerializableSensor extends ISensor implements Serializable {
 
-
-
     private transient ISensor sensor;
 
 

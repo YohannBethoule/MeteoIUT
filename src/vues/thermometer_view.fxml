@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.text.Font?>
-<?import controller.MainController?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.*?>
-<?import java.lang.*?>
-
-
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.image.ImageView?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.display.ControllerThermometer">
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.display.ControllerThermometer">
 
     <top>
-    <Label fx:id="lbName" BorderPane.alignment="CENTER"/>
+    <Label fx:id="lbName" BorderPane.alignment="CENTER" />
     </top>
     <center>
-        <ProgressBar fx:id="thermometer"  prefWidth="200.0" rotate="-90"/>
+        <Pane>
+            <children>
+                <ProgressBar fx:id="thermometer" layoutX="202.0" layoutY="153.0" prefHeight="34.0" prefWidth="200.0" progress="0.8" rotate="-90.0" />
+                <Label layoutX="317.0" layoutY="223.0" text="- 0 °C" />
+                <Label layoutX="317.0" layoutY="254.0" text="- -10 °C" />
+                <Label layoutX="319.0" layoutY="184.0" text="- 10 °C" />
+                <Label layoutX="319.0" layoutY="143.0" text="- 20 °C" />
+                <Label layoutX="319.0" layoutY="103.0" text="- 30 °C" />
+                <Label layoutX="319.0" layoutY="62.0" text="- 40 °C" />
+            </children>
+        </Pane>
     </center>
 
     <bottom>
     </bottom>
 
     <right>
+        <VBox alignment="CENTER_LEFT" prefHeight="384.0" prefWidth="254.0" BorderPane.alignment="CENTER_LEFT">
+            <Label text="- 0°C" />
+        </VBox>
     </right>
 
 
