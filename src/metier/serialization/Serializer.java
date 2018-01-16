@@ -14,9 +14,8 @@ import java.util.stream.Collectors;
 public class Serializer {
     private final static String DATA_FILE="ressources/data.xml";
     /**
-     * Load all the ISensors
-     *
-     * @return the list of ISensors loaded
+     * Load all the sensors from a XML file.
+     * @return the list of sensors read
      */
     public static List<ISensor> loadSensors() {
         List<ISensor> result = null;
@@ -30,9 +29,8 @@ public class Serializer {
     }
 
     /**
-     * Save sensors using the XML serialization
-     *
-     * @param sensors all the ISensors to serialize
+     * Save sensors into a XML file.
+     * @param sensors all the sensors to serialize
      */
     public static void saveSensors(List<ISensor> sensors) {
         try (XMLEncoder oos = new XMLEncoder(new FileOutputStream(DATA_FILE))) {

@@ -9,7 +9,9 @@ import metier.generation.RelativeGeneration;
 import static java.lang.Math.abs;
 
 public class SimpleSensor extends ISensor {
-
+    /**
+     * The TemperatureGenerator managing the temperature generation method
+     */
     private ITemperatureGenerator tempGenerator;
 
     public SimpleSensor(String name,ITemperatureGenerator generator){
@@ -18,6 +20,9 @@ public class SimpleSensor extends ISensor {
         update();
     }
 
+    /**
+     * Update the temperature of the sensor by generating a new one.
+     */
     @Override
     public void update(){
         if(tempGenerator.getClass()== RelativeGeneration.class){
@@ -28,6 +33,10 @@ public class SimpleSensor extends ISensor {
         setTemperature(t);
     }
 
+    /**
+     * Getter to the TemperatureGenerator of the sensor.
+     * @return the TemperatureGenerator of the sensor
+     */
     public ITemperatureGenerator getTempGenerator(){
         return tempGenerator;
     }

@@ -10,6 +10,10 @@ public class RandomGeneration  implements ITemperatureGenerator{
         this.max= MAX_TEMP;
     }
 
+    /**
+     * Generate a random temperature
+     * @return a random double between MIN_TEMP and MAX_TEMP
+     */
     @Override
     public double generateTemperature() {
         return Math.round(min + Math.random() * (max-min));

@@ -69,7 +69,10 @@ public class MainController implements Initializable{
     }
 
 
-
+    /**
+     * Display a new window for super sensor creation.
+     * @throws Exception when the new window doesn't load properly
+     */
     @FXML
     public void newSuperSensor()throws Exception{
         Stage stage=new Stage();
@@ -86,6 +89,10 @@ public class MainController implements Initializable{
 
     }
 
+    /**
+     * Display a new window for simple sensor creation.
+     * @throws Exception when the new window doesn't load properly
+     */
     @FXML
     public void newSensor() throws Exception{
         Stage stage=new Stage();
@@ -100,6 +107,10 @@ public class MainController implements Initializable{
         stage.show();
     }
 
+    /**
+     * Display a new window to display the digital temperature value of a sensor.
+     * @throws Exception when the new window doesn't load properly
+     */
     @FXML
     public void digitalView() throws Exception{
         ControllerDigital ctrlDigital;
@@ -113,6 +124,11 @@ public class MainController implements Initializable{
         stage.setTitle(TITLE);
         stage.show();
     }
+
+    /**
+     * Display a new window to display an image representing the temperature of a sensor.
+     * @throws Exception when the new window doesn't load properly
+     */
     @FXML
     public void iconeView()throws Exception{
         ControllerIcone ctrlIcone;
@@ -126,6 +142,11 @@ public class MainController implements Initializable{
         stage.setTitle(TITLE);
         stage.show();
     }
+
+    /**
+     * Display a new window to display a thermometer representing the temperature of a sensor.
+     * @throws Exception when the new window doesn't load properly
+     */
     @FXML
     public void thermometerView()throws Exception{
         ControllerThermometer ctrlThermometer;

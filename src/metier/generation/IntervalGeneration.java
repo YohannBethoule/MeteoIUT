@@ -10,6 +10,10 @@ public class IntervalGeneration implements ITemperatureGenerator{
         this.max=max;
     }
 
+    /**
+     * Generate a temperature between min and max.
+     * @return a random double between min and max
+     */
     @Override
     public double generateTemperature() {
         return Math.round(min + Math.random() * (max-min));

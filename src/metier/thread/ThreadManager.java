@@ -15,13 +15,20 @@ import java.util.List;
 public class ThreadManager {
     
     static List<Thread> listRunningThread = new ArrayList<>();
-    
+
+    /**
+     * Add a new thread to the list of running threads.
+      * @param threadAdded the thread to be added
+     */
     public static void addThread(Thread threadAdded){
         
         listRunningThread.add(threadAdded);
         
     }
-    
+
+    /**
+     * Stop all threads.
+     */
     public static void stopThread(){
         if(listRunningThread!=null){
             for(Thread t : listRunningThread){

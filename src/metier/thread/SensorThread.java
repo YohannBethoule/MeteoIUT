@@ -14,6 +14,10 @@ public class SensorThread extends Thread {
         addThread(this);
         this.refreshRate=refreshRate;
     }
+
+    /**
+     * Start the thread.
+     */
     @Override
     public void run(){
         try{
