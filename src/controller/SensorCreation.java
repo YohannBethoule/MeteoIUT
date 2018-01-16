@@ -55,7 +55,7 @@ public class SensorCreation implements Initializable{
                         new IntervalGeneration(Integer.parseInt(min.getText()),Integer.parseInt(max.getText())) : new RandomGeneration();
             case "Relative" :
                 return fixedTemp.getText()!=null && variationInterval.getText()!=null || fixedTemp.getText()!="" && variationInterval.getText()!="" ?
-                        new RelativeGeneration(Integer.parseInt(fixedTemp.getText()),Integer.parseInt(variationInterval.getText())) : new RandomGeneration() ;
+                        new RelativeGeneration(Double.parseDouble(fixedTemp.getText()),Integer.parseInt(variationInterval.getText())) : new RandomGeneration() ;
             default :
                 return new RandomGeneration();
 

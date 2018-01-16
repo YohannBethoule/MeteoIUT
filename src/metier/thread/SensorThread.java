@@ -24,7 +24,7 @@ public class SensorThread extends Thread {
             }
         }
         catch (InterruptedException e){
-                System.out.println(e);
+                System.err.println(e);
         }
     }
 }
