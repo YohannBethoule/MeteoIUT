@@ -1,4 +1,4 @@
-package controller;
+package controller.creation;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +13,6 @@ import metier.thread.SensorThread;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 

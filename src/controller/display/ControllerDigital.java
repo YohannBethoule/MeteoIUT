@@ -1,7 +1,6 @@
-package controller;
+package controller.display;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import metier.sensor.ISensor;
 

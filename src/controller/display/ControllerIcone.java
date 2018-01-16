@@ -1,11 +1,11 @@
-package controller;
+package controller.display;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,6 +22,8 @@ public class ControllerIcone extends ControllerDisplay {
     @FXML ImageView imgThermo;
     @FXML Label lbName;
     @FXML Label lbIndicator;
+
+    private double temp;
 
     private ObjectProperty<Image> image= new SimpleObjectProperty<Image>();
     private StringProperty pathImg = new SimpleStringProperty();
@@ -55,9 +57,9 @@ public class ControllerIcone extends ControllerDisplay {
         setImage(new Image(getPathImg()));
         lbName.textProperty().bind(sensor.nameProperty());
         lbIndicator.textProperty().bind(sensor.temperatureProperty().asString());
-        imgThermo.imageProperty().bind(imageProperty());
+        //imgThermo.imageProperty().bind(imageProperty());
+        Bindings.bindBidirectional(imgThermo.imageProperty(), imageProperty());
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

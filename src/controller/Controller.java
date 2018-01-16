@@ -1,5 +1,10 @@
 package controller;
 
+import controller.creation.SensorCreation;
+import controller.creation.SuperSensorCreation;
+import controller.display.ControllerDigital;
+import controller.display.ControllerIcone;
+import controller.display.ControllerThermometer;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ChangeListener;
@@ -16,14 +21,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.stage.Stage;
-import metier.generation.ITemperatureGenerator;
-import metier.generation.IntervalGeneration;
-import metier.generation.RandomGeneration;
-import metier.generation.RelativeGeneration;
 import metier.sensor.ISensor;
-import metier.sensor.SimpleSensor;
-import metier.sensor.SuperSensor;
-import metier.thread.SensorThread;
 
 
 public class Controller implements Initializable{

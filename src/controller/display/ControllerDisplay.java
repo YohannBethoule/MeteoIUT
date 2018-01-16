@@ -1,4 +1,4 @@
-package controller;
+package controller.display;
 
 import javafx.fxml.Initializable;
 import metier.sensor.ISensor;
